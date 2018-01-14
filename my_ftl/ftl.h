@@ -57,7 +57,6 @@ typedef struct          s_repair_command
   void                  (*f)(t_ship *ship);
 }                       t_repair_command;
 
-
 t_ship	*create_ship();
 void	my_putstr(char *str);
 char	*my_strdup(char *str);

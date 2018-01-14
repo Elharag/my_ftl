@@ -52,7 +52,7 @@ int	detectActivate(t_ship *ship)
 
   add_container_to_ship(ship);
   srand(time (NULL));
-  tab = malloc(sizeof(t_freight));
+  tab = malloc(sizeof(t_freight) * 11);
   if (tab == NULL)
     return (0);
   my_putstr_color("cyan", "On décharge . . .\n");
@@ -62,6 +62,7 @@ int	detectActivate(t_ship *ship)
       if (tab[i] == NULL)
 	  return (0);
       tab[i]->item = my_strdup(pourcentage());
+      tab[i]->next = NULL;
       add_freight_to_container(ship, tab[i]);
       i++;
     }

@@ -14,19 +14,7 @@
 t_ship		*create_ship()
 {
   t_ship		*p_ship;
-  //t_weapon		*p_weapon = NULL;
-  //t_ftl_drive		*p_drive = NULL;
-  //t_navigation_tools	*p_navigation_tools = NULL;
-  //  t_container		*p_container = NULL;
-  /*t_freight		*freight1 = NULL;
-  
-  freight1 = malloc(sizeof(*freight1));
-  if (freight1 == NULL)
-    {
-      my_putstr("Erreur dans le freight /n!");
-      return (0);
-    }*/
-  
+
   my_putstr("Construction du vaisseau en cours...\n");
   p_ship = malloc(sizeof(*p_ship));
   if (p_ship == NULL)
@@ -38,6 +26,7 @@ t_ship		*create_ship()
   add_weapon_to_ship(p_ship);
   add_ftl_drive_to_ship(p_ship);
   add_navigation_tools_to_ship(p_ship);
+  p_ship->container = 0;
   my_putstr("Amélioration du vaisseau terminé !\n");
   return (p_ship);
 }

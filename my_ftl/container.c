@@ -8,6 +8,7 @@
 ** Last update Fri Apr 14 13:19:34 2017 BENKRIZI El harag
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "ftl.h"
 
@@ -59,17 +60,25 @@ void	del_freight_from_container(t_ship *ship, t_freight *freight)
 
   if (freight == NULL)
       return ;
+  if (ship->container->first == ship->container->last)
+  {
+	  ship->container->first = NULL;
+	  ship->container->last = NULL;
+	  free(freight);
+	  freight = NULL;
+	  return ;
+  }
   tmp = ship->container->first;
-    addr = freight;
+  addr = freight;
   while ((tmp != NULL) && (tmp != addr))
       tmp = tmp->next;
-  if (tmp->next == NULL)
+  if (tmp != NULL && tmp->next == NULL)
     {
       ship->container->last = freight->prev;
       ship->container->last->next = NULL;
       free(freight);
     }
-  else if (tmp->prev == NULL)
+  else if (tmp != NULL && tmp->prev == NULL)
     {
       ship->container->first = freight->next;
       ship->container->first->prev = NULL;
@@ -89,7 +98,7 @@ void	del_freight_from_container(t_ship *ship, t_freight *freight)
 void	get_bonus(t_ship *ship)
 {
   t_freight	*tempo;
-  
+
   tempo = ship->container->first;
   while(tempo != NULL)
     {
@@ -109,10 +118,7 @@ void	get_bonus(t_ship *ship)
 	  del_freight_from_container(ship, tempo);
 	}
       if (my_strcmp(tempo->item, "scrap") == 0)
-	{
-	  //tempo = tempo;
 	  del_freight_from_container(ship, tempo);
-	}
       tempo = tempo->next;
     }
 }
